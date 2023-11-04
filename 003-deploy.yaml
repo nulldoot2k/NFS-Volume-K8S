@@ -4,7 +4,6 @@ metadata:
   name: nfs-client-provisioner
   labels:
     app: nfs-client-provisioner
-  namespace: default
 spec:
   replicas: 1
   strategy:
@@ -20,15 +19,15 @@ spec:
       serviceAccountName: nfs-client-provisioner
       containers:
         - name: nfs-client-provisioner
-          #image: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2
-          image: quay.io/external_storage/nfs-client-provisioner:latest
+          image: registry.k8s.io/sig-storage/nfs-subdir-external-provisioner:v4.0.2
+          #image: quay.io/external_storage/nfs-client-provisioner:latest
           volumeMounts:
             - name: nfs-client-root
               mountPath: /persistentvolumes
           env:
             - name: PROVISIONER_NAME
-              #value: k8s-sigs.io/nfs-subdir-external-provisioner
-              value: example.com/nfs
+              value: k8s-sigs.io/nfs-subdir-external-provisioner
+              #value: example.com/nfs
             - name: NFS_SERVER
               value: 192.168.101.136
             - name: NFS_PATH
